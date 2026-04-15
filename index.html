@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlueShare Phone Mockup</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top, #dbeafe 0%, #eff6ff 35%, #f8fafc 70%);
+      padding: 24px;
+    }
+
+    .phone {
+      width: 365px;
+      height: 790px;
+      background: #020617;
+      border-radius: 46px;
+      padding: 10px;
+      box-shadow: 0 40px 120px rgba(15, 23, 42, 0.35);
+      position: relative;
+    }
+
+    .notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 144px;
+      height: 28px;
+      background: #020617;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      z-index: 10;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 36px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.7);
+      position: relative;
+    }
+
+    .screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(37,99,235,0.08), transparent 24%);
+      pointer-events: none;
+    }
+
+    .content {
+      height: 100%;
+      overflow-y: auto;
+      padding-bottom: 20px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 52px 20px 26px;
+      color: white;
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 45%, #60a5fa 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -30px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      filter: blur(20px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 90px;
+      left: -20px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: rgba(186,230,253,0.18);
+      filter: blur(18px);
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: rgba(219, 234, 254, 0.95);
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      margin-top: 10px;
+      font-size: 29px;
+      line-height: 1.04;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p.desc {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(239, 246, 255, 0.95);
+      max-width: 230px;
+    }
+
+    .location-box {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      border-radius: 22px;
+      padding: 10px 12px;
+      text-align: right;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      min-width: 95px;
+    }
+
+    .location-box .small {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #dbeafe;
+    }
+
+    .location-box .city {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .chips {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(6px);
+    }
+
+    .search-card {
+      margin: -18px 16px 0;
+      position: relative;
+      z-index: 5;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #f1f5f9;
+      border-radius: 30px;
+      padding: 16px;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.1);
+    }
+
+    .search-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .search-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .search-header p {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    .badge {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 16px;
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .field {
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    }
+
+    .field-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .field-value {
+      margin-top: 5px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .primary-btn {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      border-radius: 22px;
+      padding: 14px;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb, #3b82f6);
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.3);
+    }
+
+    .section {
+      padding: 20px 16px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .section-header h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .section-header p {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .count {
+      text-align: right;
+    }
+
+    .count .num {
+      font-size: 28px;
+      font-weight: 800;
+      color: #2563eb;
+      line-height: 1;
+    }
+
+    .count .txt {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .ride-card {
+      background: white;
+      border: 1px solid rgba(226,232,240,0.9);
+      border-radius: 30px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      margin-bottom: 12px;
+    }
+
+    .ride-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .ride-left {
+      display: flex;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe, #93c5fd);
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .driver-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .driver-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .verified {
+      font-size: 10px;
+      font-weight: 700;
+      color: #047857;
+      background: #d1fae5;
+      border: 1px solid #a7f3d0;
+      padding: 5px 8px;
+      border-radius: 999px;
+    }
+
+    .route {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .meta {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .price-box {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .price-sub {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .ride-bottom {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+    }
+
+    .tag.blue {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-color: #dbeafe;
+    }
+
+    .fit {
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      background: #0f172a;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .secondary-btn {
+      width: 100%;
+      margin-top: 14px;
+      border: 1px solid #bfdbfe;
+      background: linear-gradient(180deg, #eff6ff, #dbeafe);
+      color: #1d4ed8;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 20px;
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    .driver-card {
+      margin: 20px 16px 0;
+      border-radius: 30px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+      color: white;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+    }
+
+    .driver-inner {
+      padding: 16px;
+    }
+
+    .driver-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .driver-header h3 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .driver-header p {
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      max-width: 215px;
+    }
+
+    .white-btn {
+      background: white;
+      color: #0f172a;
+      border: none;
+      border-radius: 18px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .driver-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .driver-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 12px 8px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .driver-pill .label {
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .driver-pill .value {
+      margin-top: 6px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-wrap {
+      padding: 18px 16px 12px;
+    }
+
+    .nav {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 28px;
+      padding: 8px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .nav-item {
+      text-align: center;
+      padding: 13px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: #64748b;
+      background: #f8fafc;
+      font-weight: 600;
+    }
+
+    .nav-item.active {
+      background: linear-gradient(180deg, #dbeafe, #eff6ff);
+      color: #1d4ed8;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+    }
+
+    .content::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="notch"></div>
+
+    <div class="screen">
+      <div class="content">
+        <div class="hero">
+          <div class="top-row">
+            <div>
+              <div class="brand">BlueShare</div>
+              <h1>Find a ride home</h1>
+              <p class="desc">
+                Student-only long-distance carpooling built for college weekends.
+              </p>
+            </div>
+
+            <div class="location-box">
+              <div class="small">Starting from</div>
+              <div class="city">Ann Arbor</div>
+            </div>
+          </div>
+
+          <div class="chips">
+            <div class="chip">Student-only</div>
+            <div class="chip">Verified</div>
+            <div class="chip">Low cost</div>
+            <div class="chip">Safer</div>
+            <div class="chip">Weekend trips</div>
+          </div>
+        </div>
+
+        <div class="search-card">
+          <div class="search-header">
+            <div>
+              <h2>Search by weekend</h2>
+              <p>Simple, fast, and built for students</p>
+            </div>
+            <div class="badge">30 sec flow</div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Weekend</div>
+            <div class="field-value">Apr 24–26</div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Destination city</div>
+            <div class="field-value">Chicago, IL</div>
+          </div>
+
+          <button class="primary-btn">Match me with a ride</button>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <div>
+              <h3>Popular matches</h3>
+              <p>Weekend + destination based ride matching</p>
+            </div>
+            <div class="count">
+              <div class="num">3</div>
+              <div class="txt">rides found</div>
+            </div>
+          </div>
+
+          <div class="ride-card">
+            <div class="ride-top">
+              <div class="ride-left">
+                <div class="avatar">ER</div>
+                <div>
+                  <div class="driver-row">
+                    <div class="driver-name">Emma R.</div>
+                    <div class="verified">Verified student</div>
+                  </div>
+                  <div class="route">Ann Arbor → Chicago</div>
+                  <div class="meta">
+                    <span>Apr 24–26 weekend</span>
+                    <span>•</span>
+                    <span>4h 18m</span>
+                    <span>•</span>
+                    <span>4.9★</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="price-box">
+                <div class="price">$34</div>
+                <div class="price-sub">per seat</div>
+              </div>
+            </div>
+
+            <div class="ride-bottom">
+              <div class="tags">
+                <div class="tag">2 seats left</div>
+                <div class="tag blue">Quiet ride</div>
+              </div>
+              <div class="fit">#1 best fit</div>
+            </div>
+
+            <button class="secondary-btn">Book seat</button>
+          </div>
+
+          <div class="ride-card">
+            <div class="ride-top">
+              <div class="ride-left">
+                <div class="avatar">JM</div>
+                <div>
+                  <div class="driver-row">
+                    <div class="driver-name">Jason M.</div>
+                    <div class="verified">Verified student</div>
+                  </div>
+                  <div class="route">Ann Arbor → Lansing</div>
+                  <div class="meta">
+                    <span>Apr 24–26 weekend</span>
+                    <span>•</span>
+                    <span>1h 12m</span>
+                    <span>•</span>
+                    <span>4.8★</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="price-box">
+                <div class="price">$16</div>
+                <div class="price-sub">per seat</div>
+              </div>
+            </div>
+
+            <div class="ride-bottom">
+              <div class="tags">
+                <div class="tag">3 seats left</div>
+                <div class="tag blue">Social</div>
+              </div>
+              <div class="fit">#2 best fit</div>
+            </div>
+
+            <button class="secondary-btn">Book seat</button>
+          </div>
+
+          <div class="ride-card">
+            <div class="ride-top">
+              <div class="ride-left">
+                <div class="avatar">ST</div>
+                <div>
+                  <div class="driver-row">
+                    <div class="driver-name">Sofia T.</div>
+                    <div class="verified">Verified student</div>
+                  </div>
+                  <div class="route">Ann Arbor → Detroit</div>
+                  <div class="meta">
+                    <span>Apr 24–26 weekend</span>
+                    <span>•</span>
+                    <span>52m</span>
+                    <span>•</span>
+                    <span>5.0★</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="price-box">
+                <div class="price">$18</div>
+                <div class="price-sub">per seat</div>
+              </div>
+            </div>
+
+            <div class="ride-bottom">
+              <div class="tags">
+                <div class="tag">1 seat left</div>
+                <div class="tag blue">Study-friendly</div>
+              </div>
+              <div class="fit">#3 best fit</div>
+            </div>
+
+            <button class="secondary-btn">Book seat</button>
+          </div>
+        </div>
+
+        <div class="driver-card">
+          <div class="driver-inner">
+            <div class="driver-header">
+              <div>
+                <h3>Driving this weekend?</h3>
+                <p>
+                  Upload your trip once and fill empty seats with verified students.
+                </p>
+              </div>
+              <button class="white-btn">List a trip</button>
+            </div>
+
+            <div class="driver-grid">
+              <div class="driver-pill">
+                <div class="label">Weekend</div>
+                <div class="value">Apr 24–26</div>
+              </div>
+              <div class="driver-pill">
+                <div class="label">To</div>
+                <div class="value">Chicago</div>
+              </div>
+              <div class="driver-pill">
+                <div class="label">Seats</div>
+                <div class="value">3 open</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-wrap">
+          <div class="nav">
+            <div class="nav-item active">Home</div>
+            <div class="nav-item">Search</div>
+            <div class="nav-item">Trips</div>
+            <div class="nav-item">Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
